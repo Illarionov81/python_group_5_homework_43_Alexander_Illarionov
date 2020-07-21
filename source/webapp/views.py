@@ -1,12 +1,14 @@
 from django.shortcuts import render
+from webapp.models import Article
 
-# Create your views here.
 from django.shortcuts import render
 
 
 def index_view(request):
-    print(request.GET.getlist('athor'))
-    return render(request, 'index.html')
+    data = Article.objects.all()
+    return render(request, 'index.html', context={
+        'articles': data
+    })
 
 def article_view(request):
     if request.method == 'GET':
